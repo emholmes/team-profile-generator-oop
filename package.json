@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/emholmes/team-profile-generator-oop#readme",
   "dependencies": {
-    "inquirer": "^8.1.2"
+    "inquirer": "^8.1.2",
+    "jest": "^27.0.6"
   }
 }
