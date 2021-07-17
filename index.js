@@ -1,23 +1,26 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateHtml = require("./src/generateHtml");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 const managerQuestions = () => {
   console.log("Please build your team");
   return inquirer.prompt([
     {
       type: "input",
-      name: "managerName",
+      name: "name",
       message: "What is the team manager's name?"
     },
     {
       type: "input",
-      name: "managerId",
+      name: "id",
       message: "What is the team manager's id?"
     }, 
     {
       type: "input", 
-      name: "managerEmail",
+      name: "email",
       message: "What is the team manager's email address?"
     }, 
     {
@@ -25,85 +28,63 @@ const managerQuestions = () => {
       name: "officeNumber",
       message: "What is the team managers office number?"
     }
-  ]);
+  ])
 }
 
-const engineerQuestions = () => {
+const teamMemberQuestions = (teamMember) => {
   return inquirer.prompt([
+
     {
       type: "input",
-      name: "engineerName",
-      message: "What is your engineers's name?"
+      name: "nameEngineer",
+      message: `What is your ${teamMember}'s name?`
     }, 
     {
       type: "input",
-      name: "engineerId",
-      message: "What is your engineers's id?"
+      name: "id",
+      message: `What is your ${teamMember}'s id?`
     }, 
     {
       type: "input", 
-      name: "engineerEmail",
-      message: "What is your engineers's eamil address?"
+      name: "email",
+      message: `What is your ${teamMember}'s eamil address?`
     },
     {
       type: "input",
-      name: "engineerGitHub",
-      message: "What is your engineers GitHub username?"
-    }
-  ])
-  .then(addTeamMember)
-}
-
-const internQuestions = () => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "internName",
-      message: "What is your intern's name?"
-    }, 
-    {
-      type: "input",
-      name: "internId",
-      message: "What is your intern's id?"
-    }, 
-    {
-      type: "input", 
-      name: "internEmail",
-      message: "What is your intern's eamil address?"
+      name: "github",
+      message: `What is your ${teamMember}'s username?`,
+      when: (teamMember === "Engineer")
     },
     {
       type: "input",
-      name: "internSchool",
-      message: "What is the name of the intern's school?"
+      name: "school",
+      message: `What is the name of the ${teamMember}'s school?`,
+      when: (teamMember === "Intern")
     }
   ])
-  .then(addTeamMember)
 }
 
 const addTeamMember = () => {
   return inquirer.prompt([
     {
       type: "checkbox",
-      name: "chooseTM",
+      name: "role",
       message: "Which type of team member would you like to add?",
       choices: ["Engineer", "Intern", "I don't want to add any more team members"]
     }
   ])
-  .then(teamInformation => {
-    if (teamInformation.chooseTM[0] === "Engineer") {
-      engineerQuestions();
-    } 
-    if (teamInformation.chooseTM[0] === "Intern") {
-      internQuestions();
-    } 
-  })
+  .then(teamMember => {
+    console.log(teamMember);
+    teamMemberQuestions(teamMember.role[0]);
+    })
 }
 
 managerQuestions()
-  .then(managerData => {
-    console.log(managerData);
-  })
+  .then(managerData => console.log(managerData))
   .then(addTeamMember)
+
+
+  
 
   
   
