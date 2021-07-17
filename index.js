@@ -1,9 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateHtml = require("./src/generateHtml");
-const Manager = require("./lib/manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+// const Manager = require("./lib/manager");
+// const Engineer = require("./lib/Engineer");
+// const Intern = require("./lib/Intern");
 
 const managerQuestions = () => {
   console.log("Please build your team");
@@ -33,7 +33,6 @@ const managerQuestions = () => {
 
 const teamMemberQuestions = (teamMember) => {
   return inquirer.prompt([
-
     {
       type: "input",
       name: "nameEngineer",
@@ -62,21 +61,25 @@ const teamMemberQuestions = (teamMember) => {
       when: (teamMember === "Intern")
     }
   ])
+  .then(addTeamMember);
 }
 
 const addTeamMember = () => {
   return inquirer.prompt([
     {
-      type: "checkbox",
+      type: "list",
       name: "role",
       message: "Which type of team member would you like to add?",
       choices: ["Engineer", "Intern", "I don't want to add any more team members"]
     }
   ])
   .then(teamMember => {
-    console.log(teamMember);
-    teamMemberQuestions(teamMember.role[0]);
-    })
+    if (teamMember.role === "I don't want to add any more team members") {
+      return false;
+    } else {
+      teamMemberQuestions(teamMember.role);
+    }
+  })
 }
 
 managerQuestions()
