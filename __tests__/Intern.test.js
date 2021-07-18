@@ -1,9 +1,13 @@
 const { expect, test } = require("@jest/globals");
 const Intern = require("../lib/Intern");
 
-test("create intern object", () => {
-  const intern = new Intern("James", 1, "james@email.com", "University of State");
+let intern;
 
+beforeEach(() => {
+  intern = new Intern("James", 1, "james@email.com", "University of State");
+});
+
+test("create intern object", () => {
   expect(intern.name).toBe("James");
   expect(intern.id).toEqual(expect.any(Number));
   expect(intern.email).toBe("james@email.com");
@@ -11,13 +15,9 @@ test("create intern object", () => {
 });
 
 test("get intern's school", () => {
-  const intern = new Intern("James", 1, "james@email.com", "University of State");
-
   expect(intern.getSchool()).toBe("University of State");
 });
 
 test("get intern's role", () => {
-  const intern = new Intern("James");
-
   expect(intern.getRole()).toBe("Intern");
-})
+});

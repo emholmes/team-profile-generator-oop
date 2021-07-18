@@ -1,7 +1,13 @@
 const Engineer = require("../lib/Engineer");
 
+let engineer;
+
+beforeEach(() => {
+  engineer = new Engineer("Sam", 1, "sam@gamil.com", "samgit");
+});
+
 test("create an engineer object", () => {
-  const engineer = new Engineer("Sam", 1, "sam@gamil.com", "samgit");
+  // const engineer = new Engineer("Sam", 1, "sam@gamil.com", "samgit");
 
   expect(engineer.name).toBe("Sam");
   expect(engineer.id).toEqual(expect.any(Number));
@@ -9,13 +15,13 @@ test("create an engineer object", () => {
 });
 
 test("get engineers github username", () => {
-  const engineer = new Engineer("Sam", 1, "sam@gamil.com", "samgit");
+  // const engineer = new Engineer("Sam", 1, "sam@gamil.com", "samgit");
 
   expect(engineer.github).toBe("samgit");
 });
 
 test("get engineers role", () => {
-  const engineer = new Engineer("Sam");
+  // const engineer = new Engineer("Sam");
 
   expect(engineer.getRole()).toBe("Engineer");
 });
