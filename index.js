@@ -1,9 +1,12 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const generateHtml = require("./src/generateHtml");
-// const Manager = require("./lib/manager");
-// const Engineer = require("./lib/Engineer");
-// const Intern = require("./lib/Intern");
+const generateHtml = require("./src/page-template");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+
+const team = [];
+
 
 const managerQuestions = () => {
   console.log("Please build your team");
@@ -29,38 +32,72 @@ const managerQuestions = () => {
       message: "What is the team managers office number?"
     }
   ])
+  .then(({ name, id, email, officeNumber }) => {
+    this.manager = new Manager(name, id, email, officeNumber);
+    team.push(this.manager);
+    console.log(team);
+  })
 }
 
-const teamMemberQuestions = (teamMember) => {
+const engineerQuestions = () => {
   return inquirer.prompt([
     {
       type: "input",
-      name: "nameEngineer",
-      message: `What is your ${teamMember}'s name?`
+      name: "name",
+      message: `What is your engineers's name?`
     }, 
     {
       type: "input",
       name: "id",
-      message: `What is your ${teamMember}'s id?`
+      message: `What is your engineers's id?`
     }, 
     {
       type: "input", 
       name: "email",
-      message: `What is your ${teamMember}'s eamil address?`
+      message: `What is your engineers's eamil address?`
     },
     {
       type: "input",
       name: "github",
-      message: `What is your ${teamMember}'s username?`,
-      when: (teamMember === "Engineer")
+      message: `What is your engineers's username?`
+    }
+  ])
+  .then(({ name, id, email, github }) => {
+    this.engineer = new Engineer(name, id, email, github);
+    team.push(this.engineer);
+    console.log(team);
+  })
+  .then(addTeamMember);
+}
+
+const internQuestions = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: `What is your intern's name?`
+    }, 
+    {
+      type: "input",
+      name: "id",
+      message: `What is your intern's id?`
+    }, 
+    {
+      type: "input", 
+      name: "email",
+      message: `What is your intern's eamil address?`
     },
     {
       type: "input",
       name: "school",
-      message: `What is the name of the ${teamMember}'s school?`,
-      when: (teamMember === "Intern")
+      message: `What is the name of the intern's school?`
     }
   ])
+  .then(({ name, id, email, school }) => {
+    this.intern = new Intern(name, id, email, school);
+    team.push(this.intern);
+    console.log(team);
+  })
   .then(addTeamMember);
 }
 
@@ -74,17 +111,33 @@ const addTeamMember = () => {
     }
   ])
   .then(teamMember => {
-    if (teamMember.role === "I don't want to add any more team members") {
-      return false;
+    if (teamMember.role === "Engineer") {
+      return engineerQuestions();
+    } else if (teamMember.role === "Intern") {
+      return internQuestions();
     } else {
-      teamMemberQuestions(teamMember.role);
+      return team;
     }
   })
 }
 
+const writeToFile = (fileName, data) => {
+  fs.writeFile(fileName, data, err => {
+    if (err) throw err;
+
+    console.log("HTMl complete!");
+  })
+}
+
 managerQuestions()
-  .then(managerData => console.log(managerData))
   .then(addTeamMember)
+  .then(teamArray => {
+    // console.log(teamArray);
+    // console.log(teamArray[0].name);
+    const indexHtml = generateHtml(teamArray);
+    writeToFile("./dist/index.html", indexHtml);
+  })
+
 
 
   
