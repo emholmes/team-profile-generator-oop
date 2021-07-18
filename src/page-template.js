@@ -51,9 +51,7 @@ module.exports = (teamArray) => {
       </header>
       <main>
         <section class="cards-container">
-          
           ${generateTeamCards(teamArray)}
-          
         </section>
       </main>
     </body>

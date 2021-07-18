@@ -7,7 +7,6 @@ const Intern = require("./lib/Intern");
 
 const team = [];
 
-
 const managerQuestions = () => {
   console.log("Please build your team");
   return inquirer.prompt([
@@ -35,7 +34,6 @@ const managerQuestions = () => {
   .then(({ name, id, email, officeNumber }) => {
     this.manager = new Manager(name, id, email, officeNumber);
     team.push(this.manager);
-    // console.log(team);
   })
 }
 
@@ -65,7 +63,6 @@ const engineerQuestions = () => {
   .then(({ name, id, email, github }) => {
     this.engineer = new Engineer(name, id, email, github);
     team.push(this.engineer);
-    // console.log(team);
   })
   .then(addTeamMember);
 }
@@ -96,7 +93,6 @@ const internQuestions = () => {
   .then(({ name, id, email, school }) => {
     this.intern = new Intern(name, id, email, school);
     team.push(this.intern);
-    // console.log(team);
   })
   .then(addTeamMember);
 }
@@ -140,16 +136,7 @@ const copyFile = () => {
 managerQuestions()
   .then(addTeamMember)
   .then(teamArray => {
-    // console.log(teamArray);
-    // console.log(teamArray[0].name);
     const indexHtml = generateHtml(teamArray);
     writeToFile("./dist/index.html", indexHtml);
     copyFile();
   })
-
-
-
-  
-
-  
-  
