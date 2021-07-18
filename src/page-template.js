@@ -1,91 +1,43 @@
-const generateManagerCard = manager => {
-  if (!manager) {
-    return "";
+const generateUniqueProp = (employee, role) => {
+  if (role === "Manager") {
+    return `<li>Office number: ${employee.getOfficeNumber().trim()}</li>`;
   }
-  return `
-    
-    ${manager
-      .map(member => {
-        return `
-        <section class="card">
-          <div class="card-header">
-            <h2>${member.getName().trim()}</h2>
-            <p>${member.getRole()}</p>
-          </div>
-          <ul class="card-body">
-            <li>ID: ${member.getId().trim()}</li>
-            <li>Email: <a href="mailto:${member.getEmail().trim()}" class="link">${member.getEmail().trim()}</a></li>
-            <li>Office number: ${member.getOfficeNumber().trim()}</li>
-          </ul>
-        </section>
-        `;
-      })
-    }
-  `;
+  if (role === "Engineer") {
+    return `<li>GitHub: <a href="https://github.com/${employee.getGitHub().trim()}" class="link">${employee.getGitHub().trim()}</a></li>`;
+  }
+  if (role === "Intern") {
+    return `<li>School: ${employee.getSchool().trim()}</li>`
+  }
 }
 
-const generateEngineerCards = engineers => {
-  if (!engineers) {
-    return "";
-  }
+const generateTeamCards = (teamArray) => {
   return `
-    ${engineers
-      .map(member => {
+    ${teamArray
+      .map(employee => {
+        let role = employee.getRole();
         return `
-        <section class="card">
-          <div class="card-header">
-            <h2>${member.getName().trim()}</h2>
-            <p>${member.getRole()}</p>
-          </div>
-          <ul class="card-body">
-            <li>ID: ${member.getId().trim()}</li>
-            <li>Email: <a href="mailto:${member.getEmail().trim()}" class="link">${member.getEmail().trim()}</a></li>
-            <li>GitHub: <a href="https://github.com/${member.getGitHub().trim()}" class="link">${member.getGitHub().trim()}</a></li>
-          </ul>
-        </section>
+          <section class="card">
+            <div class="card-header">
+              <h2>${employee.getName().trim()}</h2>
+              <p>${role}</p>
+            </div>
+            <ul class="card-body">
+              <li>ID: ${employee.getId().trim()}</li>
+              <li>Email: <a href="mailto:${employee.getEmail().trim()}" class="link">${employee.getEmail().trim()}</a></li>
+              ${generateUniqueProp(employee, role)}
+            </ul>
+          </section>
         `;
       })
       .join("")
     }
   `;
 }
-
-const generateInternCards = interns => {
-  if (!interns) {
-    return "";
-  }
-  return `
-    ${interns
-      .map(member => {
-        return `
-        <section class="card">
-          <div class="card-header">
-            <h2>${member.getName().trim()}</h2>
-            <p>${member.getRole()}</p>
-          </div>
-          <ul class="card-body">
-            <li>ID: ${member.getId().trim()}</li>
-            <li>Email: <a href="mailto:${member.getEmail().trim()}" class="link">${member.getEmail().trim()}</a></li>
-            <li>School: ${member.getSchool().trim()}</li>
-          </ul>
-        </section>
-        `
-      })
-      .join("")
-    }
-  `;
-}
-
 
 module.exports = (teamArray) => {
-  const manager = teamArray.filter(member => member.getRole() === "Manager"); 
-  const engineers = teamArray.filter(member => member.getRole() === "Engineer");
-  const interns = teamArray.filter(member => member.getRole() === "Intern");
-  
   return `
     <!DOCTYPE html> 
     <html lang="en"> 
-
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,18 +49,13 @@ module.exports = (teamArray) => {
       <header>
         <h1>My Team</h1>
       </header>
-    
-    
       <main>
         <section class="cards-container">
-          ${generateManagerCard(manager)}
-          ${generateEngineerCards(engineers)}
-          ${generateInternCards(interns)}
+          
+          ${generateTeamCards(teamArray)}
+          
         </section>
       </main>
-      
     </body>
     `;
 }
-
-
