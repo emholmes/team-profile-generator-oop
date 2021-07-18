@@ -3,14 +3,21 @@ const generateManagerCard = manager => {
     return "";
   }
   return `
+    
     ${manager
       .map(member => {
         return `
-        <p>${member.getName().trim()}</p>
-        <p>${member.getRole()}</p>
-        <p>${member.getId().trim()}</p>
-        <p>${member.getEmail().trim()}</p>
-        <p>${member.getOfficeNumber().trim()}</p>
+        <section class="card">
+          <div class="card-header">
+            <h2>${member.getName().trim()}</h2>
+            <p>${member.getRole()}</p>
+          </div>
+          <ul class="card-body">
+            <li>ID: ${member.getId().trim()}</li>
+            <li>Email: <a href="mailto:${member.getEmail().trim()}" class="link">${member.getEmail().trim()}</a></li>
+            <li>Office number: ${member.getOfficeNumber().trim()}</li>
+          </ul>
+        </section>
         `;
       })
     }
@@ -25,13 +32,20 @@ const generateEngineerCards = engineers => {
     ${engineers
       .map(member => {
         return `
-        <p>${member.getName().trim()}</p>
-        <p>${member.getRole()}</p>
-        <p>${member.getId().trim()}</p>
-        <p>${member.getEmail().trim()}</p>
-        <p>${member.getGitHub().trim()}</p>
+        <section class="card">
+          <div class="card-header">
+            <h2>${member.getName().trim()}</h2>
+            <p>${member.getRole()}</p>
+          </div>
+          <ul class="card-body">
+            <li>ID: ${member.getId().trim()}</li>
+            <li>Email: <a href="mailto:${member.getEmail().trim()}" class="link">${member.getEmail().trim()}</a></li>
+            <li>GitHub: <a href="https://github.com/${member.getGitHub().trim()}" class="link">${member.getGitHub().trim()}</a></li>
+          </ul>
+        </section>
         `;
       })
+      .join("")
     }
   `;
 }
@@ -44,13 +58,20 @@ const generateInternCards = interns => {
     ${interns
       .map(member => {
         return `
-        <p>${member.getName().trim()}</p>
-        <p>${member.getRole()}</p>
-        <p>${member.getId().trim()}</p>
-        <p>${member.getEmail().trim()}</p>
-        <p>${member.getSchool().trim()}</p>
+        <section class="card">
+          <div class="card-header">
+            <h2>${member.getName().trim()}</h2>
+            <p>${member.getRole()}</p>
+          </div>
+          <ul class="card-body">
+            <li>ID: ${member.getId().trim()}</li>
+            <li>Email: <a href="mailto:${member.getEmail().trim()}" class="link">${member.getEmail().trim()}</a></li>
+            <li>School: ${member.getSchool().trim()}</li>
+          </ul>
+        </section>
         `
       })
+      .join("")
     }
   `;
 }
@@ -70,16 +91,23 @@ module.exports = (teamArray) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Team Profile Generator</title>
+      <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    <header>My Team</header>
-    </body>
+      <header>
+        <h1>My Team</h1>
+      </header>
     
-    <main>
-      ${generateManagerCard(manager)}
-      ${generateEngineerCards(engineers)}
-      ${generateInternCards(interns)}
-    </main>
+    
+      <main>
+        <section class="cards-container">
+          ${generateManagerCard(manager)}
+          ${generateEngineerCards(engineers)}
+          ${generateInternCards(interns)}
+        </section>
+      </main>
+      
+    </body>
     `;
 }
 

@@ -35,7 +35,7 @@ const managerQuestions = () => {
   .then(({ name, id, email, officeNumber }) => {
     this.manager = new Manager(name, id, email, officeNumber);
     team.push(this.manager);
-    console.log(team);
+    // console.log(team);
   })
 }
 
@@ -54,7 +54,7 @@ const engineerQuestions = () => {
     {
       type: "input", 
       name: "email",
-      message: "What is your engineer's eamil address?"
+      message: "What is your engineer's email address?"
     },
     {
       type: "input",
@@ -65,7 +65,7 @@ const engineerQuestions = () => {
   .then(({ name, id, email, github }) => {
     this.engineer = new Engineer(name, id, email, github);
     team.push(this.engineer);
-    console.log(team);
+    // console.log(team);
   })
   .then(addTeamMember);
 }
@@ -85,7 +85,7 @@ const internQuestions = () => {
     {
       type: "input", 
       name: "email",
-      message: `What is your intern's eamil address?`
+      message: `What is your intern's email address?`
     },
     {
       type: "input",
@@ -96,7 +96,7 @@ const internQuestions = () => {
   .then(({ name, id, email, school }) => {
     this.intern = new Intern(name, id, email, school);
     team.push(this.intern);
-    console.log(team);
+    // console.log(team);
   })
   .then(addTeamMember);
 }
@@ -129,6 +129,14 @@ const writeToFile = (fileName, data) => {
   })
 }
 
+const copyFile = () => {
+  fs.copyFile("./src/style.css", "./dist/style.css", err => {
+    if (err) throw err;
+
+    console.log("CSS copied!");
+  })
+}
+
 managerQuestions()
   .then(addTeamMember)
   .then(teamArray => {
@@ -136,6 +144,7 @@ managerQuestions()
     // console.log(teamArray[0].name);
     const indexHtml = generateHtml(teamArray);
     writeToFile("./dist/index.html", indexHtml);
+    copyFile();
   })
 
 
