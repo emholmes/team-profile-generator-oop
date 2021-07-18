@@ -29,7 +29,7 @@ const managerQuestions = () => {
     {
       type: "input",
       name: "officeNumber",
-      message: "What is the team managers office number?"
+      message: "What is the team manager's office number?"
     }
   ])
   .then(({ name, id, email, officeNumber }) => {
@@ -44,22 +44,22 @@ const engineerQuestions = () => {
     {
       type: "input",
       name: "name",
-      message: `What is your engineers's name?`
+      message: "What is your engineer's name?"
     }, 
     {
       type: "input",
       name: "id",
-      message: `What is your engineers's id?`
+      message: "What is your engineer's id?"
     }, 
     {
       type: "input", 
       name: "email",
-      message: `What is your engineers's eamil address?`
+      message: "What is your engineer's eamil address?"
     },
     {
       type: "input",
       name: "github",
-      message: `What is your engineers's username?`
+      message: "What is your engineer's GitHub username?"
     }
   ])
   .then(({ name, id, email, github }) => {
