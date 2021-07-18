@@ -6,6 +6,11 @@ test("create an engineer object", () => {
   expect(engineer.name).toBe("Sam");
   expect(engineer.id).toEqual(expect.any(Number));
   expect(engineer.email).toBe("sam@gamil.com");
+});
+
+test("get engineers github username", () => {
+  const engineer = new Engineer("Sam", 1, "sam@gamil.com", "samgit");
+
   expect(engineer.github).toBe("samgit");
 });
 
