@@ -1,23 +1,67 @@
-const generateTeamMemberCards = teamArray => {
+const generateManagerCard = manager => {
+  if (!manager) {
+    return "";
+  }
   return `
-    ${teamArray
+    ${manager
       .map(member => {
         return `
-          <p>${member.getName()}</p>
-          <p>${member.getRole()}</p>
-
+        <p>${member.getName().trim()}</p>
+        <p>${member.getRole()}</p>
+        <p>${member.getId().trim()}</p>
+        <p>${member.getEmail().trim()}</p>
+        <p>${member.getOfficeNumber().trim()}</p>
         `;
       })
-      .join("")
+    }
+  `;
+}
+
+const generateEngineerCards = engineers => {
+  if (!engineers) {
+    return "";
+  }
+  return `
+    ${engineers
+      .map(member => {
+        return `
+        <p>${member.getName().trim()}</p>
+        <p>${member.getRole()}</p>
+        <p>${member.getId().trim()}</p>
+        <p>${member.getEmail().trim()}</p>
+        <p>${member.getGitHub().trim()}</p>
+        `;
+      })
+    }
+  `;
+}
+
+const generateInternCards = interns => {
+  if (!interns) {
+    return "";
+  }
+  return `
+    ${interns
+      .map(member => {
+        return `
+        <p>${member.getName().trim()}</p>
+        <p>${member.getRole()}</p>
+        <p>${member.getId().trim()}</p>
+        <p>${member.getEmail().trim()}</p>
+        <p>${member.getSchool().trim()}</p>
+        `
+      })
     }
   `;
 }
 
 
 module.exports = (teamArray) => {
-
+  const manager = teamArray.filter(member => member.getRole() === "Manager"); 
+  const engineers = teamArray.filter(member => member.getRole() === "Engineer");
+  const interns = teamArray.filter(member => member.getRole() === "Intern");
+  
   return `
-    ${teamArray.map(member => member.getName())}
     <!DOCTYPE html> 
     <html lang="en"> 
 
@@ -32,7 +76,9 @@ module.exports = (teamArray) => {
     </body>
     
     <main>
-      ${generateTeamMemberCards(teamArray)}
+      ${generateManagerCard(manager)}
+      ${generateEngineerCards(engineers)}
+      ${generateInternCards(interns)}
     </main>
     `;
 }
