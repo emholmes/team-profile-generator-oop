@@ -2,7 +2,7 @@
 ## Object-Oriented Programming Challenge
 
 ## Description
-This repo contains code to generate a team profile page using node.js and inquirer.js to prompt the user via the command-line for all information necessary to build their team profile page. This app also contains unit tests built with Jest. Technologies used to build this app includes Node.js, Inquirer.js, Jest, HTML, and CSS. View the installation and usage sections below for more details on how to use this repo/app.
+This repo contains code to generate a team profile page using node.js and inquirer.js to prompt the user via the command-line the team member's information. This app also contains unit tests built with Jest. Technologies used to build this app includes Node.js, Inquirer.js, Jest, HTML, and CSS. View the installation and usage sections below for more details on how to use this repo.
 
 ## Table of Contents
 * [Installation](#installation)
