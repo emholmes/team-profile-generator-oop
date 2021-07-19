@@ -21,7 +21,7 @@ To install any necessary dependencies run the following command:
 After cloning the repo to your local machine, open the package in an IDE. Make sure you have node.js and npm installed (hint: `node -v` & `npm -v`). In the package root directory, install inquirer.js (`npm install inquirer`). Once all dependencies are installed, initiate the program by running `node index.js` from the terminal in the root directory. After all questions are answered and the user is done adding team members, an index.html file and the corresponding stylesheet will be generated and added to a directory named: /dist/index.html and /dist/style.css. Open the index.html file in your browser to view the results.
 
 ## Video Walkthrough
-[Watch video walkthrough](https://drive.google.com/file/d/1oB34YIYzKOCTWpCsK3Cm1F1w9VTVx0te/view)
+[Watch video walkthrough](https://drive.google.com/file/d/1wy7P2qCPyQ0vmUn8oJX9ywTNHcUyxSBM/view)
 
 ## Invoking app in the terminal: 
 ![Command-line prompts](./src/images/invoking-app.png)
