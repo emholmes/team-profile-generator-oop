@@ -3,7 +3,7 @@ const generateUniqueProp = (employee) => {
     return `<li>Office number: ${employee.getOfficeNumber().trim()}</li>`;
   }
   if (employee.getRole() === "Engineer") {
-    return `<li>GitHub: <a href="https://github.com/${employee.getGitHub().trim()}" class="link">${employee.getGitHub().trim()}</a></li>`;
+    return `<li>GitHub: <a href="https://github.com/${employee.getGitHub().trim()}" class="link" target="_blank">${employee.getGitHub().trim()}</a></li>`;
   }
   if (employee.getRole() === "Intern") {
     return `<li>School: ${employee.getSchool().trim()}</li>`
