@@ -27,7 +27,7 @@ To run tests, use the following command:
 
 
 ## Video Walkthrough
-[Watch video walkthrough](https://drive.google.com/file/d/1oB34YIYzKOCTWpCsK3Cm1F1w9VTVx0te/view)
+[Watch video walkthrough](https://drive.google.com/file/d/1wy7P2qCPyQ0vmUn8oJX9ywTNHcUyxSBM/view)
 
 ## Invoking app in the terminal: 
 ![Command-line prompts](./src/images/invoking-app.png)
